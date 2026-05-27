@@ -1,33 +1,55 @@
-name = input("Nhap ho ten: ")
-age = int(input("Nhap tuoi: "))
-spo2 = int(input("Nhap SpO2: "))
-heart = int(input("Nhap nhip tim: "))
-bhyt = input("Co the BHYT khong (yes/no): ")
+
+patient_name = input("Nhap ho ten benh nhan: ")
+
+patient_age = int(input("Nhap tuoi benh nhan: "))
+
+spo2_level = int(input("Nhap chi so SpO2 (%): "))
+
+heart_rate = int(input("Nhap nhip tim (nhip/phut): "))
+
+has_insurance = input(
+    "Ban co the BHYT khong? (yes/no): "
+).lower()
 
 
-if spo2 < 90 or heart > 120:
-    triage = "DO (Cap cuu khan)"
-elif (spo2 >= 90 and spo2 <= 95) or (heart >= 100 and heart <= 120):
-    triage = "VANG (Theo doi sat)"
+if spo2_level < 90 or heart_rate > 120:
+    triage_result = "BAO DONG DO - CAP CUU KHAN"
+
+elif (90 <= spo2_level <= 95) or (100 <= heart_rate <= 120):
+    triage_result = "BAO DONG VANG - THEO DOI SAT"
+
 else:
-    triage = "XANH (Kham thuong)"
+    triage_result = "XANH - KHAM THUONG"
 
-if age < 6 or age >= 80:
-    fee = 0
-elif bhyt == "yes":
-    fee = 250000
+base_fee = 500000
+
+if patient_age < 6 or patient_age >= 80:
+    hospital_fee = 0
+
+elif has_insurance == "yes":
+    hospital_fee = 250000
+
 else:
-    fee = 500000
+    hospital_fee = base_fee
 
-print("--- PHIEU KHAM BENH DIEN TU ---")
-print("Ten benh nhan:", name)
-print("Tuoi:", age)
-print("Phan luong:", triage)
-print("Tien tam ung:", fee, "VND")
+print("\n===== PHIEU KHAM BENH =====")
 
-print("--- LOG HE THONG ---")
-print("Bien name:", type(name))
-print("Bien age:", type(age))
-print("Bien spo2:", type(spo2))
-print("Bien heart:", type(heart))
-print("Bien bhyt:", type(bhyt))
+print("Ho ten:", patient_name)
+print("Tuoi:", patient_age)
+print("SpO2:", spo2_level)
+print("Nhip tim:", heart_rate)
+print("BHYT:", has_insurance)
+
+print("\nKet qua phan luong:")
+print(triage_result)
+
+print("\nTam ung vien phi:")
+print(f"{hospital_fee:,} VND")
+
+print("\n===== LOG HE THONG =====")
+
+print("patient_name =", type(patient_name))
+print("patient_age =", type(patient_age))
+print("spo2_level =", type(spo2_level))
+print("heart_rate =", type(heart_rate))
+print("has_insurance =", type(has_insurance))
